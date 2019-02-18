@@ -1,68 +1,30 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# NeighborHood Map Project ~ Café in Abu Dhabi 
 
-## Available Scripts
+![MainPage Screen](screenshot.PNG)
 
-In the project directory, you can run:
+## What is this project?
+- It is a project from Udacity in the Front-End Developer NanoDegree. This project shows a map of a neighborhood and some marks on the map that shows the cafes in that neighborhood. An input filter for the cafes is also available and by clicking on the marker or the name of the cafe you'll get some information about that specific cafe.
 
-### `npm start`
+## Libraries, and APIs used
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Google Maps
+2. Foursquare
+3. Fontawsome
+4. React.js
+5. google-maps-react library
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Requirements and Features
+- Display map markers identifying at least 5 locations that you are interested in within chosen neighborhood. Your app displays those locations by default when the page is loaded.
+- Implement a list view of the set of locations.
+- Provide a filter option that uses an input field to filter both the list view and the map markers displayed by default on load. The list view and the markers update accordingly.
+- Add functionality using third-party APIs to provide information when a map marker or list view entry is clicked.
+- Add functionality to animate a map marker when either the list item associated with it or the map marker itself is selected.
+- Add functionality to open an infoWindow when either a location is selected from the list view or its map marker is selected directly.
+- The app's interface is intuitive to use. For example, the input text area to filter locations is easy to locate. It should be easy to understand what set of locations is being filtered.
+- Google maps and Foursquare errors are handled gracefully.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Getting Started
+- Download the project as a zip file or clone down the repository.
+- install `npm install` if you dont have the recent node version.
+- Navigate to the repository's root in the terminal. 
+- run `npm run start` and another window in the browser will open which contains the App, and if it doesnt you could navigate to http://localhost:3000/ in your browser.

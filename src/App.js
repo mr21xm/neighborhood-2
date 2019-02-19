@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import SideBar from './SideBar'
+import Media from 'react-media';
+
 class App extends Component {
 
     state = {
@@ -13,9 +15,12 @@ class App extends Component {
             this.setState(obj);
         }
     }
-
+    handleKeyPress = (event) => {
+        if(event.key == 'Enter'){
+           this.toggleCollapse();
+        }
+    }
     componentDidMount() {
-
         this.getVenues()
     }
 
@@ -32,9 +37,19 @@ class App extends Component {
     }
 
     handleListItemClick = venue => {
-        const marker= this.state.markers.find(marker => marker.id === venue.id);
+        const marker = this.state.markers.find(marker => marker.id === venue.id);
+        const menu = document.getElementsByClassName('menu')[0];
+        const mq = window.matchMedia("(max-width: 540px)");
 
-        this.handleMarkerClick(marker);
+        if (marker.id === venue.id) {
+            window.google.maps.event.trigger(marker, 'click');
+            if (mq.matches) {
+                menu.style.display = 'none'
+            } else {
+               menu.style.display = 'inline'
+            }
+            return marker;
+        }
     }
     renderMap = () => {
         loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyB3MDmTw0TTCvNztu05oiJMyxes-vxH-R0&callback=initMap")
@@ -54,7 +69,8 @@ class App extends Component {
         axios.get(endPoint + new URLSearchParams(parameters))
             .then(response => {
                 this.setState({
-                    venues: response.data.response.groups[0].items
+                    venues: response.data.response.groups[0].items,
+                    allPlaces: response.data.response.groups[0].items
                 }, this.renderMap())
             })
             .catch(error => {
@@ -82,15 +98,15 @@ class App extends Component {
             </div>`
             // Marker
             var marker = new window.google.maps.Marker({
-            position: {lat: myVenue.venue.location.lat, lng: myVenue.venue.location.lng},
-            map: map,
-            title: myVenue.venue.name,
+                position: {lat: myVenue.venue.location.lat, lng: myVenue.venue.location.lng},
+                map: map,
+                title: myVenue.venue.name,
                 id : myVenue.venue.id,
-             });
+            });
 
             markers.push(marker);
             // listener to open InfoWindow
-            marker.addListener('click', function() {
+            marker.addListener('click', function () {
                 //Animate when clicked
                 marker.setAnimation(window.google.maps.Animation.BOUNCE);
                 setTimeout(() => {
@@ -100,28 +116,39 @@ class App extends Component {
                 infowindow.setContent(contentString)
                 // Open InfoWindow when marker is clicked
                 infowindow.open(map, marker);
+
             });
+
         })
         this.setState({markers : markers})
     }
 
+
     filterPlaces = (places) => {
         this.setState({places})
-    }
+    };
+
     render() {
         return (
             <main>
                 <nav>
             <span className="icon">
-            <i className="fas fa-bars" onClick={() => this.toggleCollapse()} ></i>
+            <i className="fas fa-bars" onClick={() => this.toggleCollapse()} onKeyPress={this.handleKeyPress} tabIndex="0"></i>
           </span>
                     <h1 >NeighborHood</h1>
                 </nav>
 
-                <div id="app">
-                    <SideBar places={this.state.allPlaces} filterPlaces={this.filterPlaces} markers={this.state.markers}/>
-                    <div id="map"></div>
-                </div>
+                        <div id="app">
+                            <SideBar places={this.state.allPlaces}
+                                     filterPlaces={this.filterPlaces}
+                                     markers={this.state.markers}
+                                     handleListItemClick={this.handleListItemClick}
+                            />
+
+                            <div id="map"></div>
+                        </div>
+
+
             </main>
         );
     }

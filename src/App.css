@@ -38,7 +38,6 @@
 }
 /* Optional: Makes the sample page fill the window. */
 html, body {
-  height: 100%;
   margin: 0;
   padding: 0;
 }
@@ -65,19 +64,19 @@ html, body {
 .scroll {
   overflow-y: scroll;
   height: 100vh;
+  max-height: 100%;
 }
 
 .icon {
   font-size: 2em;
   color: white;
+
 }
 
-a {
-  color: white;
-  font-size: 40px;
-}
 
-a:hover {
+
+.icon:hover {
+  color:grey;
   cursor: pointer;
 }
 
@@ -98,16 +97,50 @@ nav {
 }
 .menu {
   width: 375px;
-  height:100vh;
-  background-color: rgba(235, 188, 70, 0.9);
-  margin: 36px 0 0;
-  box-shadow: #222 1px 3px 12px;
+  height:100%;
+  background-color: white;
   transition: all 1s ease;
   display: none;
   max-width: 100%;
-  background: transparent;
 }
 #app {
-  display:grid;
+  display:flex;
 }
 
+i.fas.fa-bars {
+  padding: 10px;
+}
+
+input#search {
+  margin: 30px 20px 0 10px;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 1.4em;
+}
+ol.venueList {
+  padding-left:0;
+  margin-bottom:0;
+}
+
+li.listItem {
+  list-style: none;
+  color: white;
+  padding: 10px;
+  box-shadow: 10px 10px 21px -4px rgba(0,0,0,0.64);
+  background: black;
+  margin: 8px;
+  display: flex;
+  align-items: center;
+}
+
+li.listItem:hover {
+  background: grey;
+  cursor: pointer;
+}
+
+li.listItem:focus {
+  background: dimgrey;
+  outline: none;
+  border-color: #719ECE;
+  box-shadow: 0 0 10px #719ECE;
+}

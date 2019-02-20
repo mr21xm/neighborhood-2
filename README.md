@@ -1,9 +1,9 @@
-# NeighborHood Map Project ~ Café in Abu Dhabi 
+# NeighborHood Map Project ~ Burger Places in Abu Dhabi 
 
 ![MainPage Screen](screenshot.PNG)
 
 ## What is this project?
-- It is a project from Udacity in the Front-End Developer NanoDegree. This project shows a map of a neighborhood and some marks on the map that shows the cafes in that neighborhood. An input filter for the cafes is also available and by clicking on the marker or the name of the cafe you'll get some information about that specific cafe.
+- It is a project from Udacity in the Front-End Developer NanoDegree. This project shows a map of a neighborhood and some marks on the map that shows the burger places in that neighborhood. An input filter for the burger places is also available and by clicking on the marker or the name of the burger place you'll get some information about that specific burger place.
 
 ## Libraries, and APIs used
 

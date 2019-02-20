@@ -8,7 +8,7 @@ export default class VenueList extends Component {
                 {
                     this.props.venues.length===0 && (
 
-                        <ol className="venueList">
+                        <ol className="venueList" aria-label ="List of burger places">
                             {this.props.places.map((venue,idx) =>
                                 <ListItem key={idx} {...venue.venue} handleListItemClick={this.props.handleListItemClick} />
                             )}
@@ -17,7 +17,7 @@ export default class VenueList extends Component {
 
                 }
                 {
-                    <ol className="venueList">
+                    <ol className="venueList" aria-label ="List of burger places">
                         {this.props.venues.map((venue,idx) =>
                             <ListItem key={idx} {...venue} handleListItemClick={this.props.handleListItemClick} />
                         )}

@@ -14,28 +14,30 @@ class App extends Component {
         updateState: obj => {
             this.setState(obj);
         }
-    }
+    };
+    // When a key is pressed this function checks that is an enter key then it will toggle the sidebar
     handleKeyPress = (event) => {
         if(event.key === 'Enter'){
            this.toggleCollapse();
         }
-    }
+    };
+
     componentDidMount() {
         this.getVenues();
 
     }
 
-
+    // This function changes the sidebar to show or hide according to its current display state
     toggleCollapse =() => {
         let menu = document.getElementsByClassName('menu')[0];// Get the menu element
 
         // If the menu is displayed
-        if(menu.style.display !== 'none') {
+        if(menu.style.display !== 'inline') {
             // Set the menu's style to hide it
-            menu.style.display = 'none'
+            menu.style.display = 'inline'
         } else {
           // Set the menu's style to show it
-            menu.style.display = 'inline'
+            menu.style.display = 'none'
         }
     }
 
@@ -140,31 +142,26 @@ class App extends Component {
     };
 
 
-    filterPlaces = (places) => {
-        this.setState({places})
-    };
-
     render() {
         return (
     <main>
             <header>
                 <nav>
                   <span className="icon">
-                    <i className="fas fa-bars" onClick={() => this.toggleCollapse()} onKeyPress={this.handleKeyPress} tabIndex="0" aria-label= "button-role"></i>
+                    <i className="fas fa-bars" onClick={() => this.toggleCollapse()} onKeyPress={this.handleKeyPress} tabIndex="0" aria-label= "Menu Button"></i>
                   </span>
-                    <h1 aria-label = "title of page">NeighborHood</h1>
+                    <h1 aria-label = "Title of page">NeighborHood</h1>
                </nav>
             </header>
 
 
             <div id="app">
                             <SideBar places={this.state.allPlaces}
-                                     filterPlaces={this.filterPlaces}
                                      markers={this.state.markers}
                                      handleListItemClick={this.handleListItemClick}
                             />
 
-                            <div id="map" aria-hidden = "true"></div>
+                            <div id="map" aria-hidden = "true" aria-label="Google Maps"></div>
             </div>
 
             <Footer />

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import SideBar from './SideBar'
-
+import Footer from './Footer'
 
 class App extends Component {
 
@@ -31,33 +31,41 @@ class App extends Component {
 
         // If the menu is displayed
         if(menu.style.display !== 'none') {
-            //Set Log animation and hide the menu
+            // Set the menu's style to hide it
             menu.style.display = 'none'
         } else {
+          // Set the menu's style to show it
             menu.style.display = 'inline'
         }
     }
 
+    // handle the list items when they are clicked
     handleListItemClick = venue => {
-        const marker = this.state.markers.find(marker => marker.id === venue.id);
+        const marker = this.state.markers.find(marker => marker.id === venue.id); // the marker id's and the venue's id are the same
         const menu = document.getElementsByClassName('menu')[0];
-        const mq = window.matchMedia("(max-width: 540px)");
-
+        const mq = window.matchMedia("(max-width: 540px)"); // screen max width for the event listener
+        // if both id's are equal
         if (marker.id === venue.id) {
+          // the eventlistener for the marker will be triggered
             window.google.maps.event.trigger(marker, 'click');
+          //  if the screen width matches
             if (mq.matches) {
+              // the menu hides when one of the items on the list is clicked
                 menu.style.display = 'none'
             } else {
+              //the menu stays showing when one of the items on the list is clicked
                menu.style.display = 'inline'
             }
             return marker;
         }
     }
+    // renders the map and loads the google map script
     renderMap = () => {
         loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyB3MDmTw0TTCvNztu05oiJMyxes-vxH-R0&callback=initMap")
         window.initMap = this.initMap
     }
 
+    // fetches from foursquare using axios package
     getVenues = () => {
         const endPoint = "https://api.foursquare.com/v2/venues/explore?"
         const parameters = {
@@ -74,9 +82,9 @@ class App extends Component {
                     venues: response.data.response.groups[0].items,
                     allPlaces: response.data.response.groups[0].items
                 }, this.renderMap())
-            })
+            }) // handle error foursquare
             .catch(error => {
-                console.log("ERROR!" + error)
+                alert("ERROR!" + error)
             })
     }
 
@@ -138,15 +146,18 @@ class App extends Component {
 
     render() {
         return (
-            <main>
+    <main>
+            <header>
                 <nav>
-            <span className="icon">
-            <i className="fas fa-bars" onClick={() => this.toggleCollapse()} onKeyPress={this.handleKeyPress} tabIndex="0" aria-label= "button-role"></i>
-          </span>
+                  <span className="icon">
+                    <i className="fas fa-bars" onClick={() => this.toggleCollapse()} onKeyPress={this.handleKeyPress} tabIndex="0" aria-label= "button-role"></i>
+                  </span>
                     <h1 aria-label = "title of page">NeighborHood</h1>
-                </nav>
+               </nav>
+            </header>
 
-                        <div id="app">
+
+            <div id="app">
                             <SideBar places={this.state.allPlaces}
                                      filterPlaces={this.filterPlaces}
                                      markers={this.state.markers}
@@ -154,10 +165,11 @@ class App extends Component {
                             />
 
                             <div id="map" aria-hidden = "true"></div>
-                        </div>
+            </div>
 
+            <Footer />
 
-            </main>
+     </main>
         );
     }
 }
@@ -172,4 +184,3 @@ function loadScript(url) {
 }
 
 export default App;
-

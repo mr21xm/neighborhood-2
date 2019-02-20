@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import SideBar from './SideBar'
-import Media from 'react-media';
+
 
 class App extends Component {
 
@@ -16,13 +16,15 @@ class App extends Component {
         }
     }
     handleKeyPress = (event) => {
-        if(event.key == 'Enter'){
+        if(event.key === 'Enter'){
            this.toggleCollapse();
         }
     }
     componentDidMount() {
-        this.getVenues()
+        this.getVenues();
+
     }
+
 
     toggleCollapse =() => {
         let menu = document.getElementsByClassName('menu')[0];// Get the menu element
@@ -86,7 +88,7 @@ class App extends Component {
             zoom: 14
         })
 
-        // InfoWindow
+         // InfoWindow
         var infowindow = new window.google.maps.InfoWindow();
         let markers = [];
         // setting marker and infoWindow on each venue
@@ -118,10 +120,16 @@ class App extends Component {
                 infowindow.open(map, marker);
 
             });
-
-        })
-        this.setState({markers : markers})
-    }
+            return marker
+        });
+        // Handle error map
+        window.gm_authFailure = () => {
+            // Display alert message
+            alert('Oops!! Google maps Error loading!');
+            this.setState({mapError: true})
+        };
+       return this.setState({markers : markers})
+    };
 
 
     filterPlaces = (places) => {
@@ -133,9 +141,9 @@ class App extends Component {
             <main>
                 <nav>
             <span className="icon">
-            <i className="fas fa-bars" onClick={() => this.toggleCollapse()} onKeyPress={this.handleKeyPress} tabIndex="0"></i>
+            <i className="fas fa-bars" onClick={() => this.toggleCollapse()} onKeyPress={this.handleKeyPress} tabIndex="0" aria-label= "button-role"></i>
           </span>
-                    <h1 >NeighborHood</h1>
+                    <h1 aria-label = "title of page">NeighborHood</h1>
                 </nav>
 
                         <div id="app">
@@ -145,7 +153,7 @@ class App extends Component {
                                      handleListItemClick={this.handleListItemClick}
                             />
 
-                            <div id="map"></div>
+                            <div id="map" aria-hidden = "true"></div>
                         </div>
 
 
